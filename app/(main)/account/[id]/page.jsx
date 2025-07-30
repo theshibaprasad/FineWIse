@@ -3,23 +3,8 @@ import { getAccountWithTransactions } from "@/actions/account";
 import { TransactionTable } from "../_components/transaction-table";
 import { notFound } from "next/navigation";
 import { AccountChart } from "../_components/account-chart";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-export default async function AccountPage({ params }) {
-  const id = await params.id;
-  
-  if (!id) {
-    notFound();
-  }
-  
-  const accountData = await getAccountWithTransactions(id);
-
-  if (!accountData) {
-    notFound();
-  }
-
-  const { transactions, ...account } = accountData;
-
+function AccountContent({ account, transactions }) {
   return (
     <div className="space-y-8 px-5 bg-white dark:bg-gray-950 min-h-screen transition-colors duration-300 ease-in-out">
       <div className="flex gap-4 items-end justify-between">
@@ -44,26 +29,41 @@ export default async function AccountPage({ params }) {
       </div>
 
       {/* Chart Section */}
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center p-8">
-            <LoadingSpinner variant="bars" text="Loading chart..." />
-          </div>
-        }
-      >
-        <AccountChart transactions={transactions} />
-      </Suspense>
+      <AccountChart transactions={transactions} />
 
       {/* Transactions Table */}
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center p-8">
-            <LoadingSpinner variant="pulse" text="Loading transactions..." />
-          </div>
-        }
-      >
-        <TransactionTable transactions={transactions} />
-      </Suspense>
+      <TransactionTable transactions={transactions} />
     </div>
+  );
+}
+
+export default async function AccountPage({ params }) {
+  const id = await params.id;
+  
+  if (!id) {
+    notFound();
+  }
+  
+  const accountData = await getAccountWithTransactions(id);
+
+  if (!accountData) {
+    notFound();
+  }
+
+  const { transactions, ...account } = accountData;
+
+  return (
+    <Suspense
+      fallback={
+        <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-950">
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="dashboard-loader"></div>
+            <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">Loading account...</p>
+          </div>
+        </div>
+      }
+    >
+      <AccountContent account={account} transactions={transactions} />
+    </Suspense>
   );
 }
