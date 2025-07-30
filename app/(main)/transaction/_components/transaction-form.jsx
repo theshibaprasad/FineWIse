@@ -97,15 +97,18 @@ export function AddTransactionForm({
 
   const handleScanComplete = (scannedData) => {
     if (scannedData) {
+      // Fill the form with scanned data
+      setValue("type", "EXPENSE"); // Default to expense for receipts
       setValue("amount", scannedData.amount.toString());
-      setValue("date", new Date(scannedData.date));
+      setValue("date", scannedData.date ? new Date(scannedData.date) : new Date());
       if (scannedData.description) {
         setValue("description", scannedData.description);
       }
       if (scannedData.category) {
         setValue("category", scannedData.category);
       }
-      toast.success("Receipt scanned successfully");
+      
+      toast.success("Receipt scanned successfully - Review and submit the transaction below");
     }
   };
 

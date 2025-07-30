@@ -223,15 +223,25 @@ export async function getUserTransactions(query = {}) {
   }
 }
 
-// Scan Receipt
-export async function scanReceipt(file) {
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Convert File to ArrayBuffer
-    const arrayBuffer = await file.arrayBuffer();
-    // Convert ArrayBuffer to Base64
-    const base64String = Buffer.from(arrayBuffer).toString("base64");
+
+// Scan Receipt
+export async function scanReceipt(fileData) {
+  try {
+    // Check if Gemini API key is available
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("Gemini API key not configured");
+    }
+
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    // Validate file data
+    if (!fileData || !fileData.type.startsWith('image/')) {
+      throw new Error("Please select a valid image file");
+    }
+
+    // Use the base64 string from the client
+    const base64String = fileData.base64;
 
     const prompt = `
       Analyze this receipt image and extract the following information in JSON format:
@@ -250,14 +260,14 @@ export async function scanReceipt(file) {
         "category": "string"
       }
 
-      If its not a recipt, return an empty object
+      If it's not a receipt, return an empty object {}
     `;
 
     const result = await model.generateContent([
       {
         inlineData: {
           data: base64String,
-          mimeType: file.type,
+          mimeType: fileData.type,
         },
       },
       prompt,
@@ -269,20 +279,36 @@ export async function scanReceipt(file) {
 
     try {
       const data = JSON.parse(cleanedText);
+      
+      // Validate the parsed data
+      if (!data || Object.keys(data).length === 0) {
+        throw new Error("No receipt data found in the image");
+      }
+      
+      if (!data.amount || isNaN(data.amount)) {
+        throw new Error("Could not extract amount from receipt");
+      }
+
       return {
         amount: parseFloat(data.amount),
-        date: new Date(data.date),
-        description: data.description,
-        category: data.category,
-        merchantName: data.merchantName,
+        date: data.date ? new Date(data.date) : new Date(),
+        description: data.description || "Receipt scan",
+        category: data.category || "other-expense",
+        merchantName: data.merchantName || "Unknown merchant",
       };
     } catch (parseError) {
-      console.error("Error parsing JSON response:", parseError);
-      throw new Error("Invalid response format from Gemini");
+      throw new Error("Invalid response format from AI. Please try again with a clearer image.");
     }
   } catch (error) {
-    console.error("Error scanning receipt:", error);
-    throw new Error("Failed to scan receipt");
+    if (error.message.includes("API key")) {
+      throw new Error("AI service not configured. Please contact support.");
+    } else if (error.message.includes("quota")) {
+      throw new Error("AI service quota exceeded. Please try again later.");
+    } else if (error.message.includes("network")) {
+      throw new Error("Network error. Please check your connection and try again.");
+    } else {
+      throw new Error(error.message || "Failed to scan receipt. Please try again.");
+    }
   }
 }
 
