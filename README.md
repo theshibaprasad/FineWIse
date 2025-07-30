@@ -1,14 +1,15 @@
-# Full Stack AI Finance Platform with Next JS, MongoDB, Tailwind, Mongoose, Inngest, ArcJet, Shadcn UI Tutorial 🔥🔥
+# Full Stack AI Finance Platform with Next JS, MongoDB, Tailwind, Mongoose, Inngest, ArcJet, Shadcn UI Tutorial ��🔥
 
 A comprehensive AI-powered finance platform built with modern web technologies. This application helps users manage their finances with intelligent features like receipt scanning, budget tracking, and automated financial insights.
 
-## 🚀 Features
+## �� Features
 
 - **AI-Powered Receipt Scanning**: Automatically extract transaction details from receipt images using Google's Gemini AI
 - **Multi-Account Management**: Support for multiple bank accounts with balance tracking
 - **Smart Budget Tracking**: Set budgets and get alerts when approaching limits
 - **Recurring Transactions**: Automate recurring payments and income
 - **Financial Analytics**: Detailed insights and spending patterns
+- **WhatsApp Bot Assistant**: Intelligent financial chatbot for real-time guidance and transaction management
 - **Email Notifications**: Monthly reports and budget alerts via Gmail SMTP
 - **Modern UI**: Beautiful, responsive design with Shadcn UI components
 
@@ -23,6 +24,7 @@ A comprehensive AI-powered finance platform built with modern web technologies. 
 - **Security**: ArcJet for rate limiting and bot protection
 - **UI Components**: Shadcn UI, Radix UI
 - **Email**: Nodemailer with Gmail SMTP and React Email templates
+- **WhatsApp**: Twilio WhatsApp API for chatbot integration
 
 ## 📦 Installation
 
@@ -54,6 +56,11 @@ A comprehensive AI-powered finance platform built with modern web technologies. 
    EMAIL_USER=your_gmail_address@gmail.com
    EMAIL_PASS=your_gmail_app_password
    
+   # WhatsApp (Twilio)
+   TWILIO_ACCOUNT_SID=your_twilio_account_sid
+   TWILIO_AUTH_TOKEN=your_twilio_auth_token
+   TWILIO_PHONE_NUMBER=your_twilio_whatsapp_number
+   
    # Security
    ARCJET_KEY=your_arcjet_key
    
@@ -72,12 +79,18 @@ A comprehensive AI-powered finance platform built with modern web technologies. 
    - Generate an App Password for this application
    - Use the App Password as `EMAIL_PASS` in your environment variables
 
-6. **Run the development server**
+6. **Set up WhatsApp Bot**
+   - Create a Twilio account
+   - Get your Account SID and Auth Token
+   - Set up a WhatsApp number through Twilio
+   - Configure webhook endpoints for message handling
+
+7. **Run the development server**
    ```bash
    npm run dev
    ```
 
-## 🗄️ Database Schema
+## ��️ Database Schema
 
 The application uses MongoDB with the following collections:
 
@@ -86,6 +99,7 @@ The application uses MongoDB with the following collections:
 - `email`: User email
 - `name`: User name
 - `imageUrl`: Profile image URL
+- `phoneNumber`: WhatsApp phone number for bot communication
 
 ### Accounts
 - `name`: Account name
@@ -121,6 +135,7 @@ The application uses Inngest for background job processing:
 1. **Recurring Transactions**: Automatically processes recurring transactions daily
 2. **Monthly Reports**: Generates and sends monthly financial reports via email
 3. **Budget Alerts**: Checks budget limits and sends alerts when needed
+4. **WhatsApp Notifications**: Sends budget alerts and reports via WhatsApp
 
 ## 🎨 UI Components
 
@@ -144,11 +159,25 @@ Built with Shadcn UI and Radix UI primitives:
 - **Custom Templates**: Beautiful React Email templates
 - **Gmail Integration**: Uses Gmail SMTP for reliable email delivery
 
+## 📱 WhatsApp Features
+
+- **AI-Powered Assistant**: Intelligent financial chatbot for real-time guidance
+- **Receipt Scanning**: Upload receipt images for automatic transaction extraction
+- **Budget Monitoring**: Get instant alerts when approaching spending limits
+- **Quick Queries**: Ask questions about spending patterns and get instant responses
+- **Transaction History**: Request account summaries and recent transactions
+- **Financial Insights**: Receive personalized spending analysis and recommendations
+- **Multi-Account Support**: Manage all your accounts through WhatsApp
+- **Real-time Notifications**: Get instant updates on account activities
+- **Natural Language**: Chat naturally in your preferred language
+- **Secure Integration**: End-to-end encrypted financial conversations
+
 ## 🤖 AI Features
 
 - **Receipt Scanning**: Extract transaction details from images
 - **Financial Insights**: AI-generated spending advice
 - **Smart Categorization**: Automatic transaction categorization
+- **WhatsApp Chatbot**: Conversational AI for financial management
 
 ## 🚀 Deployment
 
@@ -169,6 +198,7 @@ The application can be deployed to various platforms:
    - Ensure MongoDB connection is configured
    - Set all required environment variables
    - Configure Inngest for background jobs
+   - Set up Twilio WhatsApp webhooks
 
 ## 📝 License
 
