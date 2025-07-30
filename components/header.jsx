@@ -348,11 +348,11 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <SignInButton forceRedirectUrl="/dashboard">
+              <Link href="/sign-in">
                 <Button variant="outline" className="border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
                   Login
                 </Button>
-              </SignInButton>
+              </Link>
             </motion.div>
           </SignedOut>
           <SignedIn>
