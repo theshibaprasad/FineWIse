@@ -170,7 +170,12 @@ const HeroSection = () => {
               Get Started
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="px-8 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="px-8 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+            onClick={() => window.open('https://youtu.be/g6WXO6aLZEg?si=Cuw__F4i6A52F3ZI', '_blank')}
+          >
             Watch Demo
           </Button>
         </motion.div>
