@@ -223,7 +223,7 @@ export function CreateAccountDrawer({ children }) {
                     <span>Creating...</span>
                   </>
                 ) : (
-                  "Create Account"
+                  "Create Wallet"
                 )}
               </Button>
             </div>
