@@ -99,6 +99,25 @@ html {
   transform: rotateX(0deg) scale(1) translateY(40px);
 }
 
+/* Image optimization for better loading */
+.hero-image img {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optimize image loading for metered connections */
+@media (prefers-reduced-data: reduce) {
+  .hero-image img {
+    filter: blur(1px);
+    transition: filter 0.3s ease;
+  }
+  
+  .hero-image img[src] {
+    filter: none;
+  }
+}
+
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;

@@ -3,12 +3,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
 import {
   featuresData,
   howItWorksData,
   statsData,
   testimonialsData,
+  faqData,
 } from "@/data/landing";
 import HeroSection from "@/components/hero";
 import Link from "next/link";
@@ -195,26 +195,77 @@ const LandingPage = () => {
               >
                 <Card className="h-full border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
                   <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        width={48}
-                        height={48}
-                        className="rounded-full"
-                      />
-                      <div className="ml-3">
-                        <div className="font-semibold text-gray-900 dark:text-white transition-colors duration-300">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
-                          {testimonial.role}
-                        </div>
+                    <div className="mb-4">
+                      <div className="font-semibold text-gray-900 dark:text-white transition-colors duration-300">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                        {testimonial.role}
                       </div>
                     </div>
                     <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
                       "{testimonial.quote}"
                     </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* FAQ Section */}
+      <motion.section 
+        id="faq" 
+        className="py-12 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={containerVariants}
+      >
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            className="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white transition-colors duration-300"
+            variants={itemVariants}
+          >
+            Frequently Asked Questions
+          </motion.h2>
+          <div className="max-w-5xl mx-auto">
+            {faqData.map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="mb-3"
+              >
+                <Card className="border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300">
+                  <CardContent className="p-4">
+                    <details className="group">
+                      <summary className="flex justify-between items-center cursor-pointer list-none">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-300 group-open:text-blue-600 dark:group-open:text-blue-400">
+                          {faq.question}
+                        </h3>
+                        <div className="flex-shrink-0 ml-4">
+                          <svg
+                            className="w-5 h-5 text-gray-500 dark:text-gray-400 group-open:rotate-180 transition-transform duration-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </div>
+                      </summary>
+                      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </details>
                   </CardContent>
                 </Card>
               </motion.div>
