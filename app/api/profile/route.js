@@ -23,7 +23,6 @@ export async function POST(req) {
     const user = await getOrCreateUser(userId);
     
     const { phoneNumber } = await req.json();
-    console.log('Saving phone number:', phoneNumber, 'for user:', user.email);
     
     // Validate the phone number format
     if (!phoneNumber || !phoneNumber.startsWith('+91')) {
@@ -56,8 +55,6 @@ export async function POST(req) {
     
     // Only register to Twilio sandbox if updating from default to real number
     if (isUpdatingFromDefault) {
-      console.log('Registering real phone number to Twilio sandbox:', phoneNumber);
-      
       // Register to sandbox
       const registered = await registerPhoneToSandbox(phoneNumber);
       
@@ -72,7 +69,6 @@ export async function POST(req) {
     // Double check after save
     const { User } = await getDb();
     const updatedUser = await User.findOne({ clerkUserId: userId });
-    console.log('Updated user phone number:', updatedUser.phoneNumber);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error saving phone number:', err);

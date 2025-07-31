@@ -203,7 +203,7 @@ export function AddTransactionForm({
                 size="sm"
                 className="w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-300 ease-in-out"
               >
-                + Create New Account
+                + Create New Wallet
               </Button>
             </CreateAccountDrawer>
           </div>

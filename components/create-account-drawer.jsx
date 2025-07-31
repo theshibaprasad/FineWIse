@@ -112,7 +112,7 @@ export function CreateAccountDrawer({ children }) {
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
         <DrawerHeader className="border-b border-gray-200 dark:border-gray-700">
-          <DrawerTitle className="text-gray-900 dark:text-white">Create New Account</DrawerTitle>
+          <DrawerTitle className="text-gray-900 dark:text-white">Create New Wallet</DrawerTitle>
         </DrawerHeader>
         <div className="px-4 pb-4">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -121,7 +121,7 @@ export function CreateAccountDrawer({ children }) {
                 htmlFor="name"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-900 dark:text-white"
               >
-                Account Name
+                Wallet Name
               </label>
               <Input
                 id="name"
@@ -140,7 +140,7 @@ export function CreateAccountDrawer({ children }) {
                 htmlFor="type"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-900 dark:text-white"
               >
-                Account Type
+                Wallet Type
               </label>
               <Select
                 onValueChange={(value) => setValue("type", value)}

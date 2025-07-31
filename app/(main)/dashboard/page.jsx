@@ -43,7 +43,7 @@ export default async function DashboardPage() {
           <Card className="hover:shadow-md transition-colors duration-300 ease-in-out cursor-pointer border-dashed border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
             <CardContent className="flex flex-col items-center justify-center text-gray-600 dark:text-gray-300 h-full pt-5 transition-colors duration-300 ease-in-out">
               <Plus className="h-10 w-10 mb-2 text-gray-500 dark:text-gray-400 transition-colors duration-300 ease-in-out" />
-              <p className="text-sm font-medium transition-colors duration-300 ease-in-out">Add New Account</p>
+              <p className="text-sm font-medium transition-colors duration-300 ease-in-out">Add New Wallet</p>
             </CardContent>
           </Card>
         </CreateAccountDrawer>

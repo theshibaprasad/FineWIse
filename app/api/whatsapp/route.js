@@ -106,9 +106,7 @@ export async function POST(req) {
         ).join('\n');
     } else {
       // Try to parse as a transaction command
-      console.log("Attempting to parse transaction:", message);
       const parseResult = await parseTransactionMessage(message);
-      console.log("Parse result:", parseResult);
       
       if (parseResult.success) {
         try {
@@ -120,11 +118,6 @@ export async function POST(req) {
             // Use default account or first account
             const defaultAccount = accounts.find(acc => acc.isDefault) || accounts[0];
             
-            console.log("Creating transaction with data:", parseResult.data);
-            console.log("User ID:", user._id);
-            console.log("Account ID:", defaultAccount._id);
-            console.log("Account name:", defaultAccount.name);
-            
             // Create the transaction
             const transactionData = {
               userId: user._id,
@@ -135,8 +128,6 @@ export async function POST(req) {
               category: parseResult.data.category,
               date: new Date()
             };
-            
-            console.log("Transaction data to create:", transactionData);
             
             const transaction = await Transaction.create(transactionData);
 
@@ -161,7 +152,6 @@ export async function POST(req) {
           reply = `❌ Failed to add transaction: ${error.message}. Please try again or check your account setup.`;
         }
       } else {
-        console.log("Parse failed:", parseResult.error);
         reply = `❓ I didn't understand that command.\n\n` +
           `*Try these examples:*\n` +
           `• "spend 2000 in food"\n` +
