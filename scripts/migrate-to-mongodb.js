@@ -140,11 +140,6 @@ async function migrateData() {
     console.log(`✅ Migrated ${budgets.length} budgets`);
 
     console.log('🎉 Migration completed successfully!');
-    console.log('\n📋 Summary:');
-    console.log(`- Users: ${users.length}`);
-    console.log(`- Accounts: ${accounts.length}`);
-    console.log(`- Transactions: ${transactions.length}`);
-    console.log(`- Budgets: ${budgets.length}`);
 
   } catch (error) {
     console.error('❌ Migration failed:', error);
