@@ -64,19 +64,16 @@ const HeroSection = () => {
   }, [currentText, currentTextIndex, isDeleting, texts, isVisible]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const imageElement = imageRef.current;
-      if (imageElement) {
-        const rect = imageElement.getBoundingClientRect();
-        const scrolled = window.scrollY;
-        const rate = scrolled * -0.5;
-        imageElement.style.transform = `translateY(${rate}px)`;
+    const imageElement = imageRef.current;
 
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          imageElement.classList.add("scrolled");
-        } else {
-          imageElement.classList.remove("scrolled");
-        }
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const scrollThreshold = 100;
+
+      if (scrollPosition > scrollThreshold) {
+        imageElement.classList.add("scrolled");
+      } else {
+        imageElement.classList.remove("scrolled");
       }
     };
 
