@@ -9,6 +9,7 @@ The loading system provides consistent, animated loading states across the entir
 ## 🧩 Components
 
 ### 1. LoadingSpinner
+
 The main loading component with multiple variants and sizes.
 
 ```jsx
@@ -27,6 +28,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 ```
 
 **Props:**
+
 - `size`: "sm" | "default" | "lg" | "xl"
 - `variant`: "spinner" | "dots" | "pulse" | "bars"
 - `text`: Optional loading text
@@ -34,6 +36,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 - `className`: Additional CSS classes
 
 ### 2. LoadingOverlay
+
 Full-screen loading overlay with backdrop blur.
 
 ```jsx
@@ -49,6 +52,7 @@ import { LoadingOverlay } from "@/components/ui/loading-spinner";
 ```
 
 ### 3. Skeleton Components
+
 Placeholder loading states for content.
 
 ```jsx
@@ -65,6 +69,7 @@ import { Skeleton, CardSkeleton, TableSkeleton } from "@/components/ui/loading-s
 ```
 
 ### 4. ButtonLoading
+
 Loading state for buttons.
 
 ```jsx
@@ -78,25 +83,33 @@ import { ButtonLoading } from "@/components/ui/loading-spinner";
 ## 🔄 Loading Variants
 
 ### 1. Spinner (Default)
+
 Classic rotating spinner animation.
+
 ```jsx
 <LoadingSpinner variant="spinner" />
 ```
 
 ### 2. Dots
+
 Three dots with staggered animation.
+
 ```jsx
 <LoadingSpinner variant="dots" />
 ```
 
 ### 3. Pulse
+
 Single pulsing dot animation.
+
 ```jsx
 <LoadingSpinner variant="pulse" />
 ```
 
 ### 4. Bars
+
 Three animated bars.
+
 ```jsx
 <LoadingSpinner variant="bars" />
 ```
@@ -146,6 +159,7 @@ const result = await withLoading(
 ## 📍 Implementation Examples
 
 ### 1. Form Submission
+
 ```jsx
 const [loading, setLoading] = useState(false);
 
@@ -166,6 +180,7 @@ const [loading, setLoading] = useState(false);
 ```
 
 ### 2. Data Fetching
+
 ```jsx
 const { data, loading, error } = useFetch(fetchData);
 
@@ -179,6 +194,7 @@ if (loading) {
 ```
 
 ### 3. Page Loading
+
 ```jsx
 <Suspense
   fallback={
@@ -192,6 +208,7 @@ if (loading) {
 ```
 
 ### 4. Table Loading
+
 ```jsx
 {deleteLoading && (
   <div className="flex items-center justify-center p-4">
@@ -217,6 +234,7 @@ const {
 ```
 
 **New Features:**
+
 - `isLoading`: Additional loading state
 - `reset()`: Function to clear all states
 - Better error handling
@@ -225,24 +243,29 @@ const {
 ## 🎯 Best Practices
 
 ### 1. Use Appropriate Variants
+
 - **Spinner**: For general loading states
 - **Dots**: For data fetching operations
 - **Pulse**: For quick operations
 - **Bars**: For file uploads or heavy operations
 
 ### 2. Provide Context
+
 Always include descriptive text with loading states:
+
 ```jsx
 <LoadingSpinner text="Saving your changes..." />
 ```
 
 ### 3. Consistent Sizing
+
 - Use `sm` for buttons and inline elements
 - Use `default` for general loading states
 - Use `lg` for page-level loading
 - Use `xl` for full-screen loading
 
 ### 4. Color Coordination
+
 - Use `primary` for general operations
 - Use `success` for successful operations
 - Use `danger` for destructive operations
@@ -258,11 +281,13 @@ Always include descriptive text with loading states:
 ## 🔄 Migration Guide
 
 ### Before (Old Loading)
+
 ```jsx
 {loading && <Loader2 className="animate-spin h-4 w-4" />}
 ```
 
 ### After (New Loading)
+
 ```jsx
 {loading && <LoadingSpinner size="sm" variant="spinner" />}
 ```
@@ -301,4 +326,4 @@ const customColors = {
 };
 ```
 
-This comprehensive loading system ensures a consistent, professional user experience throughout the AI Finance Platform with smooth, animated loading states that provide clear feedback to users during data operations. 
+This comprehensive loading system ensures a consistent, professional user experience throughout the AI Finance Platform with smooth, animated loading states that provide clear feedback to users during data operations.
