@@ -42,7 +42,7 @@ AI-powered financial management platform helping users track expenses, manage bu
 
    ```bash
    git clone https://github.com/theshibaprasad/FineWIse.git
-   cd finwise
+   cd FineWIse
    ```
 
 2. **Install dependencies**
